@@ -9,7 +9,7 @@ import playsound
 #pip install -r requirements.txt
 
 # Create a bot instance
-os.environ["OPENAI_API_KEY"] = "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"
+os.environ["OPENAI_API_KEY"] = "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"
 ai_bot = App.from_config(config_path="config.yaml")
 
 # Embed resources: websites, PDFs, videos
