@@ -6,10 +6,13 @@ import dash_bootstrap_components as dbc
 from dash_iconify import DashIconify
 from gtts import gTTS
 import playsound
-#pip install -r requirements.txt
+from dotenv import find_dotenv, load_dotenv
+
+dotenv_path = find_dotenv()
+load_dotenv(dotenv_path)  # load api key
 
 # Create a bot instance
-os.environ["OPENAI_API_KEY"] = "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"
+# os.environ["OPENAI_API_KEY"] = "key"
 ai_bot = App.from_config(config_path="config.yaml")
 
 # Embed resources: websites, PDFs, videos
