@@ -12,7 +12,7 @@ dotenv_path = find_dotenv()
 load_dotenv(dotenv_path)  # load ap
 
 # Create a bot instance
-# os.environ["OPENAI_API_KEY"] = "key"
+os.environ["OPENAI_API_KEY"] = OPENAI_API_KEY
 ai_bot = App.from_config(config_path="config.yaml")
 
 # Embed resources: websites, PDFs, videos
