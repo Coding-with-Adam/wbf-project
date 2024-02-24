@@ -9,7 +9,7 @@ import playsound
 from dotenv import find_dotenv, load_dotenv
 
 dotenv_path = find_dotenv()
-load_dotenv(dotenv_path)  # load api key
+load_dotenv(dotenv_path)  # load api keys
 
 # Create a bot instance
 # os.environ["OPENAI_API_KEY"] = "key"
