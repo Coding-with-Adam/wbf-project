@@ -9,3 +9,4 @@ gTTS==2.5.1
 gtts-token==1.1.4
 playsound==1.2.2
 gunicorn
+chromadb==0.4.22
