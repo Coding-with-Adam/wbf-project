@@ -1,15 +1,9 @@
 import os
-import tempfile
 from dash import Dash, html, dcc, callback, Input, Output, State, no_update
 from embedchain import App
 import dash_bootstrap_components as dbc
 from dash_iconify import DashIconify
-from gtts import gTTS
-import playsound
-# from dotenv import find_dotenv, load_dotenv
 
-# dotenv_path = find_dotenv()
-# load_dotenv(dotenv_path)  # load ap
 
 # Create a bot instance
 os.environ["OPENAI_API_KEY"]
@@ -17,7 +11,7 @@ ai_bot = App.from_config(config_path="config.yaml")
 
 # Embed resources: websites, PDFs, videos
 ai_bot.add("https://www.wildbirdfund.org/page-sitemap.xml", data_type="sitemap")
-# ai_bot.add("https://nycaudubon.org/our-work/conservation/project-safe-flight")
+ai_bot.add("https://nycaudubon.org/our-work/conservation/project-safe-flight")
 # ai_bot.add("Birds Flying Into Windows.pdf", data_type='pdf_file')
 # ai_bot.add("https://www.youtube.com/watch?v=l8LDTRxc0Bc")
 # ai_bot.add("https://wildbirdrehab.com/sitemap.xml", data_type="sitemap")
@@ -49,8 +43,6 @@ app.layout = dbc.Container([
         html.Br(),
         submit_button,
         dcc.Loading(id="load", children=html.Div(id='response-area', children='')),
-        speak_button,
-        html.Div(id="empty-div"),
         html.Hr()
         ]),
     dbc.Container([
@@ -74,22 +66,6 @@ def create_response(_, question):
     else:
         answer = ai_bot.query(question)
         return answer
-
-@app.callback(
-    Output('empty-div', 'children'),
-    Input('speak-btn', 'n_clicks'),
-    State('response-area', 'children'),
-    prevent_initial_call=True
-)
-def speak_text(_, answer):
-    if isinstance(answer, str):
-        text_speech = gTTS(answer, lang='en')
-        with tempfile.NamedTemporaryFile(suffix='.mp3', delete=False) as temp_file:
-            temp_file_name = temp_file.name
-            text_speech.save(temp_file_name)
-            temp_file.close()
-            playsound.playsound(temp_file_name)
-        return no_update
 
 if __name__ == '__main__':
     app.run_server(debug=False)
